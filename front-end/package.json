@@ -1,0 +1,37 @@
+{
+  "name": "example_pwa_front-end",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "build": "NODE_ENV=production node_modules/webpack/bin/webpack.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgsnat/example_pwa.git"
+  },
+  "author": "Jefferson Silva <jgsnat@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jgsnat/example_pwa/issues"
+  },
+  "homepage": "https://github.com/jgsnat/example_pwa#readme",
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-toastify": "^5.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.29.0",
+    "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.11.5"
+  }
+}
