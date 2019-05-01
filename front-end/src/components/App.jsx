@@ -1,4 +1,6 @@
-import React from 'react';
+import React from 'react'
+import Header from './Header'
+import NovoUsuario from './NovoUsuario'
 
 class App extends React.Component {
 
@@ -6,12 +8,13 @@ class App extends React.Component {
 
         return (
             <div>
-                React!
+                <Header />
+                <NovoUsuario />
             </div>
-        );
+        )
 
     }
 
 }
 
-export default App;
+export default App
