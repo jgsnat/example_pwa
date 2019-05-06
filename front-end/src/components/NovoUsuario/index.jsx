@@ -53,10 +53,6 @@ class NovoUsuario extends React.Component {
 
         return (
             <div className="center">
-<<<<<<< HEAD
-                <form className="pure-form pure-form-stacked">
-                    <Label htmlFor="nome" texto="Quem é você?" />
-=======
 
                 <form className="pure-form pure-form-stacked">
 
@@ -87,7 +83,6 @@ class NovoUsuario extends React.Component {
                         atualizarGenero={ this.atualizarGenero }
                     />
                     
->>>>>>> e29faf59212190668dedc5b55908e9354e8e8caa
                 </form>
 
             </div>
