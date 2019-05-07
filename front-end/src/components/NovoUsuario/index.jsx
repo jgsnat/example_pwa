@@ -16,7 +16,8 @@ class NovoUsuario extends React.Component {
             validacao: {
                 nomeInvalido: false,
                 generoInvalido: false
-            }
+            },
+            primeiraVisaoCompleta: false
         }
 
         this.atualizarNome = this.atualizarNome.bind(this)
@@ -53,54 +54,133 @@ class NovoUsuario extends React.Component {
         validacao.nomeInvalido = ! usuario.validarNome();
         validacao.generoInvalido = ! usuario.validarGenero();
 
+        let mensagem = '';
+        let primeiraVisaoCompleta = false;
+
+        if (validacao.nomeInvalido && validacao.generoInvalido)
+            mensagem = 'Os campos nome e gênero estão inválidos!'
+        else if (validacao.nomeInvalido)
+            mensagem = 'Seu nome está inválido!'
+        else if (validacao.generoInvalido)
+            mensagem = 'Selecione seu gênero!'
+        else
+            primeiraVisaoCompleta = true
+        
+        if (!primeiraVisaoCompleta)
+            this.props.erro(mensagem);
+
         this.setState({
-            validacao
+            validacao,
+            primeiraVisaoCompleta
         })
 
     }
 
-    render() {
+    renderizarNome() {
 
-        const { nomeInvalido, generoInvalido } = this.state.validacao
-        const { nome, genero } = this.state.usuario
+        const { nomeInvalido } = this.state.validacao
+        const { primeiraVisaoCompleta } = this.state
+        const { nome } = this.state.usuario
+
+        return (
+            <section>
+                
+                <Label 
+                    htmlFor="nome" 
+                    texto="Quem é você?"
+                    valorInvalido={ nomeInvalido }
+                />
+
+                <Input 
+                    id="nome"
+                    placeholder="Digite seu nome"
+                    maxLength="40"
+                    readOnly={ primeiraVisaoCompleta }
+                    valorInvalido={ nomeInvalido }
+                    defaultValue={ nome }
+                    onChange={ this.atualizarNome }
+                />
+
+            </section>
+        )
+    }
+
+    renderizarGenero() {
+
+        const { generoInvalido } = this.state.validacao
+        const { primeiraVisaoCompleta } = this.state
+        const { genero } = this.state.usuario
+
+
+        if (primeiraVisaoCompleta)
+            return null
+        else {
+            return (
+                <section>
+                    
+                    <Label
+                        texto="Seu gênero:"
+                        valorInvalido={ generoInvalido }
+                    />
+
+                    <GenderSelector
+                        valorInvalido={ generoInvalido }
+                        genero={ genero }
+                        atualizarGenero={ this.atualizarGenero }
+                    />
+
+                </section>
+            )
+        }
+
+    }
+
+    renderizarBotoes() {
+
+        const { primeiraVisaoCompleta } = this.state;
+
+        if (primeiraVisaoCompleta) {
+            return (
+                <section>
+                    <Button
+                        texto="Voltar"
+                        onClick={ e => {
+                            e.preventDefault();
+                            this.setState({
+                                primeiraVisaoCompleta: false
+                            });
+                        }}
+                    />
+                    <Button 
+                        principal
+                        texto="Salvar"
+                    />
+                </section>
+            )
+        } else {
+            return (
+                <section>
+                    <Button
+                        principal
+                        texto="Próximo"
+                        onClick={ this.validar }
+                    />
+                </section>
+            )
+        }
+
+    }
+
+    render() {
 
         return (
             <div className="center">
 
                 <form className="pure-form pure-form-stacked">
 
-                    <Label 
-                        htmlFor="nome" 
-                        texto="Quem é você?"
-                        valorInvalido={ nomeInvalido }
-                    />
-
-                    <Input 
-                        id="nome"
-                        placeholder="Digite seu nome"
-                        maxLength="40"
-                        readOnly={ false }
-                        valorInvalido={ nomeInvalido }
-                        defaultValue={ nome }
-                        onChange={ this.atualizarNome }
-                    />
-
-                    <Label 
-                        texto="Seu gênero:"
-                        valorInvalido={ generoInvalido }
-                    />
-
-                    <GenderSelector 
-                        valorInvalido={ generoInvalido }
-                        genero={ genero }
-                        atualizarGenero={ this.atualizarGenero }
-                    />
-
-                    <Button
-                        principal
-                        texto="Próximo"
-                        onClick={ this.validar }
-                    />
+                    { this.renderizarNome() }
+                    { this.renderizarGenero() }
+                    { this.renderizarBotoes() }
                     
                 </form>
 
