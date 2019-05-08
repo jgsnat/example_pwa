@@ -12,6 +12,15 @@ class App extends React.Component {
                 <Header />
                 <NovoUsuario
                     erro={ msg => this.refs.toast.erro(msg) }
+                    onSubmit={ usuario => {
+                        
+                        let genero = usuario.genero == 'm' ? 'o' : 'a'
+
+                        this.refs.toast.sucesso(
+                            `Seja bem-vind${genero} ${usuario.nome}`
+                        )
+
+                    }}
                 />
                 <Toast ref="toast" />
             </div>

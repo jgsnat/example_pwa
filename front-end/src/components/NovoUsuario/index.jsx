@@ -3,7 +3,9 @@ import Label from '../Label'
 import Input from '../Input'
 import GenderSelector from '../GenderSelector'
 import Usuario from '../../models/Usuario'
+import Avatar from '../../models/Avatar'
 import Button from '../Button'
+import ImageScroller from '../ImageScroller'
 
 class NovoUsuario extends React.Component {
 
@@ -40,7 +42,8 @@ class NovoUsuario extends React.Component {
 
         e.preventDefault()
         let usuario = this.state.usuario
-        usuario.genero = genero
+        usuario.genero = genero;
+        usuario.avatar = Avatar.obterTodos[0];
         this.setState({
             usuario
         })
@@ -145,15 +148,24 @@ class NovoUsuario extends React.Component {
                     <Button
                         texto="Voltar"
                         onClick={ e => {
+
                             e.preventDefault();
+                            let { usuario } = this.state;
+                            usuario.avatar = Avatar.obterTodos[0];
                             this.setState({
+                                usuario,
                                 primeiraVisaoCompleta: false
                             });
+
                         }}
                     />
                     <Button 
                         principal
                         texto="Salvar"
+                        onClick={ e => {
+                            e.preventDefault();
+                            this.props.onSubmit(this.state.usuario)
+                        }}
                     />
                 </section>
             )
