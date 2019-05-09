@@ -73,7 +73,7 @@ class ImageScroller extends React.Component {
 
         }
 
-        const list = this.props.elementos.map(
+        const lista = this.props.elementos.map(
             (entry, index) => this.renderizarImagem(entry, index)
         )
 
@@ -213,7 +213,7 @@ class ImageScroller extends React.Component {
             fontSize: '20px',
             textAlign: 'center',
             padding: '5px',
-            width: '380px'
+            width: '310px'
         };
 
         return (

@@ -43,7 +43,7 @@ class NovoUsuario extends React.Component {
         e.preventDefault()
         let usuario = this.state.usuario
         usuario.genero = genero;
-        usuario.avatar = Avatar.obterTodos[0];
+        usuario.avatar = Avatar.obterTodos()[0];
         this.setState({
             usuario
         })
@@ -151,7 +151,7 @@ class NovoUsuario extends React.Component {
 
                             e.preventDefault();
                             let { usuario } = this.state;
-                            usuario.avatar = Avatar.obterTodos[0];
+                            usuario.avatar = Avatar.obterTodos()[0];
                             this.setState({
                                 usuario,
                                 primeiraVisaoCompleta: false
@@ -183,6 +183,37 @@ class NovoUsuario extends React.Component {
 
     }
 
+    renderizarAvatar() {
+
+        let { usuario } = this.state;
+
+        if (this.state.primeiraVisaoCompleta) {
+            return (
+                <section>
+                    <Label
+                        texto="Escolha seu avatar:"
+                    />
+                    <ImageScroller
+                        arquivo="img/avatars.png"
+                        eixoY={ (usuario.genero == 'm' ? 0 : 1) }
+                        elementos={ Avatar.obterTodos() }
+                        selecionado={ usuario.avatar }
+                        onChange={ avatar => {
+                            
+                            usuario.avatar = avatar;
+                            this.setState({
+                                usuario
+                            })
+
+                        }}
+                    />
+                </section>
+            )
+        }else
+            return null
+
+    }
+
     render() {
 
         return (
@@ -192,6 +223,7 @@ class NovoUsuario extends React.Component {
 
                     { this.renderizarNome() }
                     { this.renderizarGenero() }
+                    { this.renderizarAvatar() }
                     { this.renderizarBotoes() }
                     
                 </form>
