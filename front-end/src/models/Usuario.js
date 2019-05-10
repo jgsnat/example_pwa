@@ -1,4 +1,7 @@
 import Avatar from './Avatar';
+import Repository from '../infrastructure/Repository';
+
+const repository = new Repository();
 
 class Usuario {
 
@@ -28,6 +31,23 @@ class Usuario {
             return this.genero === param
         })
         
+    }
+
+    salvar(callback) {
+        repository.salvar(this, callback);
+    }
+
+    static obter(sucesso, falha) {
+        repository.obter(json => {
+            let usuario = new Usuario();
+            usuario.nome = json.nome;
+            usuario.genero = json.genero;
+            usuario.avatar = new Avatar(
+                json.avatar.index,
+                json.avatar.descricao
+            );
+            sucesso(usuario);
+        }, falha);
     }
 
 }
