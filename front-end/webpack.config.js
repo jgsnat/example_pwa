@@ -82,7 +82,8 @@ module.exports = {
     devServer: {
         publicPath: "/",
         contentBase: "./dist",
-        port: "3000"
+        port: "3000",
+        headers: { "Cache-Control": "max-age=600"}
     }
 
 };
