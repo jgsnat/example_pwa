@@ -83,7 +83,8 @@ module.exports = {
         publicPath: "/",
         contentBase: "./dist",
         port: "3000",
-        headers: { "Cache-Control": "max-age=600"}
+        headers: { "Cache-Control": "max-age=600"},
+        historyApiFallback: true
     }
 
 };
