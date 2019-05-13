@@ -6,6 +6,7 @@
         <link rel="shortcut icon" href="img/favicon.ico">
         <title>behappywith.me</title>
         <script>
+            // <!--
             if('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('behappy.sw.js')
                     .then(function(registration){
@@ -15,9 +16,18 @@
                         console.error('Erro no registro: ', err);
                     })
             }
+            //-->
         </script>
     </head>
     <body>
+        <noscript>
+            <div>
+                Desculpe, mas não é possível utilizar esta aplicação com o recurso de scripts desabilitado.
+                Verifique como habilitá-lo e tente novamente.
+                <br />
+                <img src="img/logo.png" />
+            </div>
+        </noscript>
         <div id="main"></div>
     </body>
 </html>
